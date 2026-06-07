@@ -1,0 +1,21 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: vet_db
+    environment:
+      POSTGRES_DB: veterinary
+      POSTGRES_USER: vetuser
+      POSTGRES_PASSWORD: vetpass
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: vet_backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
