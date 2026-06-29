@@ -7,7 +7,7 @@ class Kardex(models.Model):
 
     producto = models.ForeignKey(
         Producto,
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT
     )
 
     fecha = models.DateTimeField(

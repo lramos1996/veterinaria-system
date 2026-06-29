@@ -8,16 +8,16 @@ class HistoriaClinica(models.Model):
 
     mascota = models.ForeignKey(
         Mascota,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="historias_clinicas"
     )
 
     veterinario = models.ForeignKey(
         Veterinario,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name="historias_clinicas"
     )
-
-    fecha = models.DateField()
 
     peso = models.DecimalField(
         max_digits=6,
@@ -46,7 +46,18 @@ class HistoriaClinica(models.Model):
     fecha_creacion = models.DateTimeField(
         auto_now_add=True
     )
+    
+    fecha_atencion = models.DateTimeField()
 
+    def __str__(self):
+
+        return (
+            f"{self.mascota.nombre} - "
+            f"{self.fecha_atencion}"
+        )
     class Meta:
         verbose_name = "Historia Clínica"
         verbose_name_plural = "Historias Clínicas"
+        ordering = [
+            "-fecha_atencion"
+        ]

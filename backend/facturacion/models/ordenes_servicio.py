@@ -6,6 +6,12 @@ from veterinaria.models import Mascota
 
 class OrdenServicio(models.Model):
 
+    ESTADOS = (
+        ("PENDIENTE", "Pendiente"),
+        ("FACTURADA", "Facturada"),
+        ("ANULADA", "Anulada"),
+    )
+
     numero = models.CharField(
         max_length=20,
         unique=True
@@ -37,9 +43,13 @@ class OrdenServicio(models.Model):
 
     estado = models.CharField(
         max_length=20,
+        choices=ESTADOS,
         default="PENDIENTE"
     )
 
     class Meta:
         verbose_name = "Orden de Servicio"
         verbose_name_plural = "Órdenes de Servicio"
+
+    def __str__(self):
+        return self.numero

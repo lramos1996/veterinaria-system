@@ -2,12 +2,24 @@ from django.db import models
 
 from .comprobantes import Comprobante
 
+from inventario.models.productos import (
+    Producto
+)
+
 
 class DetalleComprobante(models.Model):
 
     comprobante = models.ForeignKey(
         Comprobante,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="detalles"
+    )
+
+    producto = models.ForeignKey(
+        Producto,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True
     )
 
     descripcion = models.CharField(
@@ -31,4 +43,6 @@ class DetalleComprobante(models.Model):
 
     class Meta:
         verbose_name = "Detalle Comprobante"
-        verbose_name_plural = "Detalle Comprobantes"
+        verbose_name_plural = (
+            "Detalle Comprobantes"
+        )

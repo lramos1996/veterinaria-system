@@ -107,6 +107,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+
+    "EXCEPTION_HANDLER":
+        "shared.exceptions.exception_handler.custom_exception_handler",
+
+    "DEFAULT_PAGINATION_CLASS":
+        "rest_framework.pagination.PageNumberPagination",
+
+    "PAGE_SIZE": 10,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

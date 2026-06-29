@@ -13,7 +13,7 @@ class MovimientoInventario(models.Model):
 
     producto = models.ForeignKey(
         Producto,
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT
     )
 
     tipo = models.CharField(
